@@ -1,0 +1,54 @@
+sudo: required
+language: ruby
+services: docker
+env:
+  global:
+  - DOCKER_COMPOSE_VERSION=1.18.0
+  - COMMIT=${TRAVIS_COMMIT::8}
+  - DUSER=dimmsd
+  - REPO="dimmsd/ubuntu-httpd"
+  - MAIN_DOMAIN=example.loc
+  - FPM_IMAGE=ubuntu-php-fpm
+  - HTTPD_IMAGE=ubuntu-httpd
+  - UBUNTU_VERSION=16.04
+  - PHP_VERSION=7.0
+  - TIMEZONE=Europe/Moscow
+  - CLEAR_APACHE_LOG=1
+  - OWN_USER=dimm
+  - OWN_UID=1000
+  - OWN_GID=1000
+  - TEST_A=0.1
+  - HTTPDIP=172.50.0.100
+  - FPMIP=172.50.0.101
+  - SUBNET=172.50.0.0/24
+  - secure: FKsHCY+lLf7HAHEhIlbVEqy5C4dFf0hckwNlDBa2DNSY4CCOfFnzjtykO3Hl6jlQKmVjFoNTtMKjd1F3+IQ8pH82FYfJDIGqLb1749cLpPDa586LWczldjPKDlOS6ODhnZuIDnNX4xARN3nyE9Gt8jHJ+mceio6SB2rkgUkf9VPOuJLPRq4wff/vN2eVdo0O+/moxXcAb8clPU6+mQyb3xqbfW0knzIs2F8IxQkwj9JGdi6BlQikG1MNz9C17hPQcLxzEkhivJkoY8VMDw9FVZSCkIN5VRDVQsLlWmuE/+ciTHk3u15lCq39J3MfcwR0aF1yrRQ3h+tBgMU4gr5aX3W4MAldXBPPGU4FBaq/sCdHCo+koF/yUvuJ7f5DJz1UJ/huLE4BICvU8MXH3gQYg9hCvfoWZJ5pWjoeeX+BHMfQk+WJmj54XGbDNfDAaGJ2YO1TMslwahKoqGHpHqUftbmCHYtuYrjOdWlj/dohUxdTR4qFYi1/Wyeo4KeW9xrUtFxXa0Mr6Rxm5lnZScFvFBNs9WepVCIKNCvZfalMmAnxG3tn1aBHNNAQ1BXnHSQGEfohcTR1TqzqEP66TQIA9V6sHha/MA4L+vgo1V0Hmx+zn40io3MgwtxyXJVqT6RaVjOKm/n4NQFoysEGSVx1ihbOcjPymM2lWBpZ3c6T9cA=
+  - secure: P8KvC1wphyL0BjzMCbx7O47e/j6NHzXveo9iHCNiv/86ioHXwLSIb6p9z+MgQW0CBqJOp0IZcVirebZTesJ2Od5ulJFFpejpmwHpLlDbd5ExMbRlvg0RHvOKXBu/+UUVaa+yp5kFJ93H8zJUzwiu7BW+BCAAKlLujW2BWgtd2pcHscAgvKx/YRmR5vNf/vtfQfaWE7+fVD3kTEDTOeVEnZUTfv4T+nNKzCjGBenQiNH26EQD9uxsSZ6VPqoWCMIqj/x6nbrvtoXz9AJPxWzt1paV29RjEk8MdmdBGBNzceJMEjO9vXorgeAicXRiBSrBgKRErTKFuLM00yYKEHwAAccaJvt1Lg8uXickrpA0W8WuvFcbzAziWVlRZfhM1kzM47/MmDbOWE/ztJ28PM7bwBY2vENwkEJRqXO26qOdLXqTEEayaBnYD9KpOnE6ROF74jPpJmmfIV53jmKgghOWQlQavncQTRNTAigy4xKDbKEU8/5vNuxTmWq/yU//78KDFgdlmiFVqHmoMUaYZaEQnr1v7IrUplURKmWSULb6+srD/QxlUmcplotFRxIsSjtr925/7pSjEWvXA2LWap+Fz1RPRPJMd0AlhTIxRh6qWjWQA4H6FZgELe1x7ikrcp4Eeq/v0eg6zrFhYLgdsIOAgGBrTFn9GTp+WBHECCt7X3c=
+  - secure: dsv93f5JgF0dCMqnSq380Bw/BNmj41SUNjkqzS2LOrDE5VY3IrnSJHj3MtkB4SeVU22Ws/nNOob8oAc/Jfi5AaHL2wTlxRDxaeKEAcVBfkkquWct4hVMsYZeLHfeOYegoRqXtgf5zBdZo3Wtjp4FA+Rv0At5uikcSRSMKxERtGlQ3pOudu5db399US0CP2piZIAdCiNTpcQhEnC3+RxdzGCsFv4W1sc9iPb58PPZNkOAh/90Q4/1bLpE9tWnRR1HQcH0PNoTyU7ZHf0AzLnpDTt/ItG0qbH2UOwjTz1RGwlNvI6qhJ7ehfkyF6mOL1lVtBYnng6K+zRMfa02YklFSrzcjf0j/Fj9UV1e1nxdafm870wbq3TfelM1rRRHtmob2/I45DjE8/cYIoosyG+Vr/J/DimUhIKdSo69OyRZG0933OhwvClp+GsIE4QtyGSm+Uj8PTqRzkycK0Ts5Cf1gLGLuVMuTLvKDV29rN6mEpzLxqCC/AKuXMgf/MfwM204K9VZSKtXT2XRz4v+DLbDmek3xqwP2VFuT5RnQNBc+mWgfaYP9wh6dAngTdSfqIT5rpp6P8X0DYHdc0MRmfdgcbigx0NY4grzGgUExF8Ir+tSIkvFNULYOWerbC8cAzaR416OJ1Fcdz8ixiH19dBAAy9muRZ1v7Ul862H8DpCbD4=
+before_install:
+- sudo apt update -y
+- sudo apt install --only-upgrade docker-ce -y
+- sudo rm /usr/local/bin/docker-compose
+- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
+  -s`-`uname -m` > docker-compose
+- chmod +x docker-compose
+- sudo mv docker-compose /usr/local/bin
+- env > .env
+install:
+- docker-compose build
+- docker-compose up -d
+script:
+- docker images
+- docker ps | grep -q con-$FPM_IMAGE
+- docker ps | grep -q con-$HTTPD_IMAGE
+- "./utils/test1_host.sh"
+- "./utils/test2_host.sh"
+- "./utils/test3_host.sh"
+- "./utils/test4_host.sh"
+- "./utils/test5_host.sh"
+- "./utils/test6h_host.sh"
+- "./utils/test7_host.sh"
+after_success:
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- export TAG=$UBUNTU_VERSION
+- docker tag $HTTPD_IMAGE:$TAG $REPO:$TAG
+- docker push $REPO:$TAG
