@@ -8,6 +8,7 @@ env:
   - DUSER=dimmsd
   - REPO="dimmsd/ubuntu-httpd"
   - MAIN_DOMAIN=example.loc
+  - MAIN_PATH=/var/www/main
   - FPM_IMAGE=ubuntu-php-fpm
   - HTTPD_IMAGE=ubuntu-httpd
   - UBUNTU_VERSION=16.04
