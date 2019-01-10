@@ -12,6 +12,8 @@ services:
     volumes:
       - ./utils:/tmp/utils
       - ./log-fpm:/tmp/log-fpm
+    networks:
+      test_demo:
 
   httpd:
     build:
@@ -28,6 +30,7 @@ services:
       - php-fpm
     environment:
       - MAIN_DOMAIN=${MAIN_DOMAIN}
+      - MAIN_PATH=${MAIN_PATH}
       - TIMEZONE=${TIMEZONE}
       - CLEAR_APACHE_LOG=${CLEAR_APACHE_LOG}
     extra_hosts:

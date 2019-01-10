@@ -47,6 +47,6 @@ exec-as-user:
 fpm-status:
 	@docker exec -it con-$(FPM_IMAGE) /usr/local/bin/test-php-fpm.sh  127.0.0.1 status status
 fpm-exec-index:
-	@docker exec -it con-$(FPM_IMAGE) /usr/local/bin/test-php-fpm.sh 127.0.0.1 index.php /var/www/main/index.php
+	@docker exec -it con-$(FPM_IMAGE) /usr/local/bin/test-php-fpm.sh 127.0.0.1 index.php $(MAIN_PATH)/index.php
 check-site:
 	@docker exec -it con-$(HTTPD_IMAGE) /usr/local/bin/test7.sh
